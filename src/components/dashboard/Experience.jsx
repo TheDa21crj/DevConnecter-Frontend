@@ -43,7 +43,9 @@ const Experience = ({ experience }) => {
           </Fragment>
         </>
       ) : (
-        "No experience"
+        <>
+          <p className="my-2">No experience</p>
+        </>
       )}
     </>
   );
