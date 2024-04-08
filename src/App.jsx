@@ -7,6 +7,8 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Navbar from "./components/layout/Navbar";
 import Profiles from "./components/profiles/Profiles";
+import Dashboard from "./components/dashboard/Dashboard";
+import PrivateRoute from "./components/routing/PrivateRoute";
 
 // axios
 import axios from "axios";
@@ -22,6 +24,10 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
         <Route path="profiles" element={<Profiles />} />
+        <Route
+          path="dashboard"
+          element={<PrivateRoute component={Dashboard} />}
+        />
       </Routes>
     </Router>
   );
