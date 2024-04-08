@@ -9,6 +9,7 @@ import Navbar from "./components/layout/Navbar";
 import Profiles from "./components/profiles/Profiles";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/routing/PrivateRoute";
+import ProfileForm from "./components/profile-forms/ProfileForm";
 
 // axios
 import axios from "axios";
@@ -27,6 +28,10 @@ function App() {
         <Route
           path="dashboard"
           element={<PrivateRoute component={Dashboard} />}
+        />
+        <Route
+          path="create-profile"
+          element={<PrivateRoute component={ProfileForm} />}
         />
       </Routes>
     </Router>
