@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Spinner from "../layout/Spinner";
-// import ProfileItem from "./ProfileItem";
+import ProfileItem from "./ProfileItem";
 
 import axios from "axios";
 
