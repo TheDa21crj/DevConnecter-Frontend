@@ -13,6 +13,8 @@ const Profiles = () => {
     const response = await axios.get(`/api/profile`);
 
     if (response.status === 200) {
+      console.log(response.data);
+
       setprofiles(response.data);
       setLoading(false);
     }
