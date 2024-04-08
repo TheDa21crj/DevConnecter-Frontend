@@ -1,8 +1,11 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useContext } from "react";
 import { Link, useMatch, useNavigate } from "react-router-dom";
 // import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
 // import { createProfile, getCurrentProfile } from '../../actions/profile';
+
+// state
+import AuthContext from "./../../store/auth-context";
 
 /*
   NOTE: declare initialState outside of component
@@ -38,6 +41,8 @@ const ProfileForm = (
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
   const navigate = useNavigate();
+
+  const authCtx = useContext(AuthContext);
 
   // useEffect(() => {
   //   // if there is no profile, attempt to fetch one
@@ -79,14 +84,20 @@ const ProfileForm = (
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
-    const editing = profile ? true : false;
+    // const editing = profile ? true : false;
 
     // createProfile(formData, editing).then(() => {
-    //   if (!editing) navigate("/dashboard");
+    // if (!editing) navigate("/dashboard");
     // });
+
+    // const res = await api.post("/profile", formData, {
+    //   headers: { "x-auth-token": `${authCtx.token}` },
+    // });
+
+    // console.log(res);
   };
 
   return (
