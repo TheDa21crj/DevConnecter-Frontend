@@ -1,8 +1,19 @@
-import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { Fragment, useState, useContext } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+
+// state
+import AuthContext from "./../../store/auth-context";
 
 export default function Navbar() {
-  const [isAuthenticated, setisAuthenticated] = useState(false);
+  const authCtx = useContext(AuthContext);
+
+  const redirect = useNavigate();
+
+  const logout = async () => {
+    redirect("/signIn");
+
+    authCtx.logout();
+  };
 
   const authLinks = (
     <ul>
@@ -19,10 +30,7 @@ export default function Navbar() {
         </Link>
       </li>
       <li>
-        <a
-          //  onClick={logout}
-          href="#!"
-        >
+        <a onClick={logout} href="#!">
           <i className="fas fa-sign-out-alt" />{" "}
           <span className="hide-sm">Logout</span>
         </a>
@@ -50,7 +58,7 @@ export default function Navbar() {
           <i className="fas fa-code" /> DevConnector
         </Link>
       </h1>
-      <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
+      <Fragment>{authCtx.isLoggedIn ? authLinks : guestLinks}</Fragment>
     </nav>
   );
 }
