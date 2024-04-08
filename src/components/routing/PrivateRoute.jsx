@@ -19,8 +19,6 @@ const PrivateRoute = ({
   if (authCtx.isLoggedIn) return <Component />;
 
   return <Navigate to="/login" />;
-
-  // return <div>hello PR</div>;
 };
 
 export default PrivateRoute;
