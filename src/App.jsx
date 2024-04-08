@@ -10,6 +10,7 @@ import Profiles from "./components/profiles/Profiles";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import ProfileForm from "./components/profile-forms/ProfileForm";
+import Profile from "./components/profile/Profile";
 
 // axios
 import axios from "axios";
