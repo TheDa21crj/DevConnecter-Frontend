@@ -33,6 +33,19 @@ function App() {
           path="create-profile"
           element={<PrivateRoute component={ProfileForm} />}
         />
+        <Route path="profile/:id" element={<Profile />} />
+        {/* <Route
+          path="edit-profile"
+          element={<PrivateRoute component={ProfileForm} />}
+        />
+        <Route
+          path="add-experience"
+          element={<PrivateRoute component={AddExperience} />}
+        />
+        <Route
+          path="add-education"
+          element={<PrivateRoute component={AddEducation} />}
+        /> */}
       </Routes>
     </Router>
   );
