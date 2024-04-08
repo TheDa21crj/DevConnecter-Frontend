@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 // import PropTypes from "prop-types";
 // import { connect } from "react-redux";
 import DashboardActions from "./DashboardActions";
-// import Experience from "./Experience";
-// import Education from "./Education";
+import Experience from "./Experience";
+import Education from "./Education";
 // import { getCurrentProfile, deleteAccount } from "../../actions/profile";
 
 // state
@@ -28,7 +28,7 @@ const Dashboard = () => {
       if (res.data) {
         console.log(res.data);
 
-        setData(res.data);
+        setData([res.data]);
       }
     } catch (error) {
       console.log(error);
@@ -55,9 +55,9 @@ const Dashboard = () => {
         </>
       ) : (
         <>
-          {/* <DashboardActions /> */}
-          {/* <Experience experience={profile.experience} /> */}
-          {/* <Education education={profile.education} /> */}
+          <DashboardActions />
+          <Experience experience={dataShow[0].experience} />
+          <Education education={dataShow[0].education} />
 
           <div className="my-2">
             <button
