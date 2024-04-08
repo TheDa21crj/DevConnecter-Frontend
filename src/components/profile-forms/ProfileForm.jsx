@@ -80,11 +80,13 @@ const ProfileForm = (
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
-    const editing = profile ? true : false;
     e.preventDefault();
-    createProfile(formData, editing).then(() => {
-      if (!editing) navigate("/dashboard");
-    });
+
+    const editing = profile ? true : false;
+
+    // createProfile(formData, editing).then(() => {
+    //   if (!editing) navigate("/dashboard");
+    // });
   };
 
   return (
