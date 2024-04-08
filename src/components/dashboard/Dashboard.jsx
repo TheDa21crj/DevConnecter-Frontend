@@ -26,12 +26,15 @@ const Dashboard = () =>
 
     const getCurrentProfile = async () => {
       console.log("Fetching Profiles...");
+
       try {
         const res = await axios.get("/api/profile/me", {
           headers: { "x-auth-token": `${authCtx.token}` },
         });
 
-        console.log(res);
+        if (res.data) {
+          console.log(res.data);
+        }
       } catch (error) {
         console.log(error);
       }
