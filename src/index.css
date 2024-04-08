@@ -218,6 +218,11 @@ img {
   border-radius: 50%;
 }
 
+.imgRound {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
 .line {
   height: 1px;
   background: #ccc;
