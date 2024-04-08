@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 
+import axios from "axios";
+
 export default function Register() {
   const [formData, setFormData] = useState({
     name: "",
@@ -15,7 +17,36 @@ export default function Register() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = async (e) => {};
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (password !== password2) {
+      setAlert("Passwords do not match", "danger");
+    } else {
+      try {
+        const res = await axios.post(`/api/users`, formData);
+
+        console.log(res);
+
+        // dispatch({
+        //   type: REGISTER_SUCCESS,
+        //   payload: res.data,
+        // });
+        // dispatch(loadUser());
+      } catch (err) {
+        // const errors = err.response.data.errors;
+
+        console.log(err);
+
+        // if (errors) {
+        //   errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+        // }
+
+        // dispatch({
+        //   type: REGISTER_FAIL,
+        // });
+      }
+    }
+  };
 
   return (
     <section className="container">
