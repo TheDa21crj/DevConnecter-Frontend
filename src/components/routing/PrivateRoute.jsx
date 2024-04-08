@@ -13,8 +13,6 @@ const PrivateRoute = ({
 }) => {
   const authCtx = useContext(AuthContext);
 
-  console.log(authCtx.isLoggedIn);
-
   // if (loading) return <Spinner />;
   if (authCtx.isLoggedIn) return <Component />;
 
