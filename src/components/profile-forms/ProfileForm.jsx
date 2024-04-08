@@ -7,6 +7,8 @@ import { Link, useMatch, useNavigate } from "react-router-dom";
 // state
 import AuthContext from "./../../store/auth-context";
 
+import axios from "axios";
+
 /*
   NOTE: declare initialState outside of component
   so that it doesn't trigger a useEffect
@@ -87,17 +89,24 @@ const ProfileForm = (
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    console.table(formData);
+
     // const editing = profile ? true : false;
 
     // createProfile(formData, editing).then(() => {
     // if (!editing) navigate("/dashboard");
     // });
 
-    // const res = await api.post("/profile", formData, {
-    //   headers: { "x-auth-token": `${authCtx.token}` },
-    // });
+    const res = await axios.post("/api/profile", formData, {
+      headers: { "x-auth-token": `${authCtx.token}` },
+    });
 
-    // console.log(res);
+    if (res.status === "200") {
+      console.log(res.data);
+
+      navigate("/dashboard");
+    } else {
+    }
   };
 
   return (
@@ -208,7 +217,7 @@ const ProfileForm = (
           >
             Add Social Network Links
           </button>
-          <span>Optional</span>
+          <span style={{ fontSize: "smaller", color: "#888" }}>(Optional)</span>
         </div>
 
         {displaySocialInputs && (
