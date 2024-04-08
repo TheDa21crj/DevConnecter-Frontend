@@ -1,5 +1,8 @@
-import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "./../../store/auth-context";
+
+import axios from "axios";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -9,11 +12,42 @@ export default function Login() {
 
   const { email, password } = formData;
 
+  const redirect = useNavigate();
+
+  const authCtx = useContext(AuthContext);
+
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      const res = await axios.post(`/api/auth`, formData);
+
+      console.log(res.data);
+
+      if (res.data.token) {
+        console.log("first");
+
+        await authCtx.login(
+          res.data.user.name,
+          res.data.user.email,
+          res.data.user.avatar,
+          res.data.token,
+          10800000
+        );
+
+        if (authCtx.target == null) {
+          redirect("/dashboard");
+        } else {
+          redirect(`/${authCtx.target}`);
+          authCtx.settarget(null);
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
