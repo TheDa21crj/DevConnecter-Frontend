@@ -7,7 +7,7 @@ import ProfileTop from "./ProfileTop";
 import ProfileAbout from "./ProfileAbout";
 // import ProfileExperience from "./ProfileExperience";
 // import ProfileEducation from "./ProfileEducation";
-// import ProfileGithub from "./ProfileGithub";
+import ProfileGithub from "./ProfileGithub";
 // import { getProfileById } from "../../actions/profile";
 
 // state
@@ -100,9 +100,9 @@ const Profile = () => {
                     )}
                   </div> */}
 
-                  {/* {profiles.githubusername && (
-                    <ProfileGithub username={profile.githubusername} />
-                  )} */}
+                  {profiles.githubusername && (
+                    <ProfileGithub username={profiles[0].githubusername} />
+                  )}
                 </div>
               </>
             ) : (
