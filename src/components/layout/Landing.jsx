@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, Navigate } from "react-router-dom";
-import PropTypes from "prop-types";
+import Spinner from "../layout/Spinner";
+
+// state
+import AuthContext from "./../../store/auth-context";
 
 import axios from "axios";
 
@@ -24,25 +27,36 @@ const Landing = () => {
   }, []);
 
   return (
-    <section className="landing">
-      <div className="dark-overlay">
-        <div className="landing-inner">
-          <h1 className="x-large">Developer Connector</h1>
-          <p className="lead">
-            Create a developer profile/portfolio, share posts and get help from
-            other developers
-          </p>
-          <div className="buttons">
-            <Link to="/register" className="btn btn-primary">
-              Sign Up
-            </Link>
-            <Link to="/login" className="btn btn-light">
-              Login
-            </Link>
+    <>
+      {data.length === 0 ? (
+        <Spinner />
+      ) : (
+        <section
+          className="landing"
+          style={{
+            background: `url("${data[0].urls.full}") no-repeat center center/cover`,
+          }}
+        >
+          <div className="dark-overlay">
+            <div className="landing-inner">
+              <h1 className="x-large">Developer Connector</h1>
+              <p className="lead">
+                Create a developer profile/portfolio, share posts and get help
+                from other developers
+              </p>
+              <div className="buttons">
+                <Link to="/register" className="btn btn-primary">
+                  Sign Up
+                </Link>
+                <Link to="/login" className="btn btn-light">
+                  Login
+                </Link>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
+      )}
+    </>
   );
 };
 
