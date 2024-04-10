@@ -68,11 +68,11 @@ const Profile = () => {
                 <div className="profile-grid my-1">
                   <ProfileTop profile={profiles} />
                   <ProfileAbout profile={profiles[0]} />
-                  {/* <div className="profile-exp bg-white p-2">
+                  <div className="profile-exp bg-white p-2">
                     <h2 className="text-primary">Experience</h2>
-                    {profile.experience.length > 0 ? (
+                    {profiles[0].experience.length > 0 ? (
                       <Fragment>
-                        {profile.experience.map((experience) => (
+                        {profiles[0].experience.map((experience) => (
                           <ProfileExperience
                             key={experience._id}
                             experience={experience}
@@ -86,9 +86,9 @@ const Profile = () => {
 
                   <div className="profile-edu bg-white p-2">
                     <h2 className="text-primary">Education</h2>
-                    {profile.education.length > 0 ? (
+                    {profiles[0].education.length > 0 ? (
                       <Fragment>
-                        {profile.education.map((education) => (
+                        {profiles[0].education.map((education) => (
                           <ProfileEducation
                             key={education._id}
                             education={education}
@@ -98,7 +98,7 @@ const Profile = () => {
                     ) : (
                       <h4>No education credentials</h4>
                     )}
-                  </div> */}
+                  </div>
 
                   {profiles.githubusername && (
                     <ProfileGithub username={profiles[0].githubusername} />
