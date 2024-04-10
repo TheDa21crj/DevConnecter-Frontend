@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
-// import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 
+import axios from "axios";
+
 const Landing = () => {
-  // if (isAuthenticated) {
-  //   return <Navigate to="/dashboard" />;
-  // }
+  const [data, setData] = useState([]);
+
+  const dataFun = async () => {
+    try {
+      const response = await axios.get(
+        `https://api.unsplash.com/photos/random?client_id=lZORFNXHHfw166nb7Zu1YOIkHAGJ_ShIPLjUgAfUPQM`
+      );
+
+      setData([response.data]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    dataFun();
+  }, []);
 
   return (
     <section className="landing">
@@ -30,13 +45,5 @@ const Landing = () => {
     </section>
   );
 };
-
-// Landing.propTypes = {
-//   isAuthenticated: PropTypes.bool,
-// };
-
-// const mapStateToProps = (state) => ({
-//   isAuthenticated: state.auth.isAuthenticated,
-// });
 
 export default Landing;
