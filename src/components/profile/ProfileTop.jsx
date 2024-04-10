@@ -5,7 +5,11 @@ const ProfileTop = ({ profile }) => {
   console.log(profile);
   return (
     <div className="profile-top bg-primary p-2">
-      <img className="round-img my-1" src={profile[0].user.avatar} alt="" />
+      <img
+        className="round-img my-1 imgRound"
+        src={profile[0].user.avatar}
+        alt=""
+      />
       <h1 className="large">{profile[0].user.name}</h1>
       <p className="lead">
         {profile[0].status}
