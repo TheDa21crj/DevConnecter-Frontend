@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useContext } from "react";
 // import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 // import { connect } from "react-redux";
@@ -10,71 +10,108 @@ import Spinner from "../layout/Spinner";
 // import ProfileGithub from "./ProfileGithub";
 // import { getProfileById } from "../../actions/profile";
 
+// state
+import AuthContext from "./../../store/auth-context";
+
+import axios from "axios";
+
 const Profile = () => {
+  const [loading, setLoading] = useState(true);
+  const [profiles, setprofiles] = useState([]);
+
   const { id } = useParams();
+
+  const authCtx = useContext(AuthContext);
+
   // useEffect(() => {
   //   getProfileById(id);
   // }, [getProfileById, id]);
 
+  const getProfileById = async () => {
+    try {
+      const response = await axios.get("/api/profile");
+
+      if (response.status === 200) {
+        setLoading(false);
+
+        console.log(response.data);
+        setprofiles(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getProfileById();
+  }, []);
+
   return (
-    // <section className="container">
-    //   {profile === null ? (
-    //     <Spinner />
-    //   ) : (
-    //     <Fragment>
-    //       <Link to="/profiles" className="btn btn-light">
-    //         Back To Profiles
-    //       </Link>
-    //       {auth.isAuthenticated &&
-    //         auth.loading === false &&
-    //         auth.user._id === profile.user._id && (
-    //           <Link to="/edit-profile" className="btn btn-dark">
-    //             Edit Profile
-    //           </Link>
-    //         )}
-    //       <div className="profile-grid my-1">
-    //         <ProfileTop profile={profile} />
-    //         <ProfileAbout profile={profile} />
-    //         <div className="profile-exp bg-white p-2">
-    //           <h2 className="text-primary">Experience</h2>
-    //           {profile.experience.length > 0 ? (
-    //             <Fragment>
-    //               {profile.experience.map((experience) => (
-    //                 <ProfileExperience
-    //                   key={experience._id}
-    //                   experience={experience}
-    //                 />
-    //               ))}
-    //             </Fragment>
-    //           ) : (
-    //             <h4>No experience credentials</h4>
-    //           )}
-    //         </div>
+    <section className="container">
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Fragment>
+          <>
+            {profiles.length > 0 ? (
+              <>
+                <Link to="/profiles" className="btn btn-light">
+                  Back To Profiles
+                </Link>
+                {auth.isAuthenticated &&
+                  auth.loading === false &&
+                  auth.user._id === profile.user._id && (
+                    <Link to="/edit-profile" className="btn btn-dark">
+                      Edit Profile
+                    </Link>
+                  )}
+                <div className="profile-grid my-1">
+                  <ProfileTop profile={profile} />
+                  <ProfileAbout profile={profile} />
+                  <div className="profile-exp bg-white p-2">
+                    <h2 className="text-primary">Experience</h2>
+                    {profile.experience.length > 0 ? (
+                      <Fragment>
+                        {profile.experience.map((experience) => (
+                          <ProfileExperience
+                            key={experience._id}
+                            experience={experience}
+                          />
+                        ))}
+                      </Fragment>
+                    ) : (
+                      <h4>No experience credentials</h4>
+                    )}
+                  </div>
 
-    //         <div className="profile-edu bg-white p-2">
-    //           <h2 className="text-primary">Education</h2>
-    //           {profile.education.length > 0 ? (
-    //             <Fragment>
-    //               {profile.education.map((education) => (
-    //                 <ProfileEducation
-    //                   key={education._id}
-    //                   education={education}
-    //                 />
-    //               ))}
-    //             </Fragment>
-    //           ) : (
-    //             <h4>No education credentials</h4>
-    //           )}
-    //         </div>
+                  <div className="profile-edu bg-white p-2">
+                    <h2 className="text-primary">Education</h2>
+                    {profile.education.length > 0 ? (
+                      <Fragment>
+                        {profile.education.map((education) => (
+                          <ProfileEducation
+                            key={education._id}
+                            education={education}
+                          />
+                        ))}
+                      </Fragment>
+                    ) : (
+                      <h4>No education credentials</h4>
+                    )}
+                  </div>
 
-    //         {profile.githubusername && (
-    //           <ProfileGithub username={profile.githubusername} />
-    //         )}
-    //       </div>
-    //     </Fragment>
-    //   )}
-    // </section>
-    <div>Hello</div>
+                  {profile.githubusername && (
+                    <ProfileGithub username={profile.githubusername} />
+                  )}
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+          </>
+        </Fragment>
+      )}
+    </section>
   );
 };
 
